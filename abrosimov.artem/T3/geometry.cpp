@@ -37,8 +37,7 @@ double abrosimov::Polygon::getArea() const
 {
     const Point pointFirst = points[0];
     Point prev = points[1];
-    return std::accumulate(points.begin() + 2, points.end(), 0.0,[&pointFirst, &prev]
-    (double accumulatedArea, const Point& current)
+    return std::accumulate(points.begin() + 2, points.end(), 0.0,[&pointFirst, &prev](double accumulatedArea, const Point& current)
         {
             double TriangleArea = getTriangleArea(pointFirst, prev, current);
             accumulatedArea += TriangleArea;
