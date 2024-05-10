@@ -55,9 +55,7 @@ std::istream& abrosimov::operator>>(std::istream& in, abrosimov::DelimiterIO&& d
         return in;
     }
     char null = '0';
-    
     in >> null;
-    
     if (in && (null != dest.exp))
     {
         in.setstate(std::ios::failbit);
@@ -72,7 +70,6 @@ std::istream& abrosimov::operator>>(std::istream& in, abrosimov::Point& point)
     {
         return in;
     }
-    
     in >> abrosimov::DelimiterIO{ '(' } >> point.x >> abrosimov::DelimiterIO{ ';' } >> point.y >> abrosimov::DelimiterIO{ ')' };
     return in;
 }
@@ -85,20 +82,15 @@ std::istream& abrosimov::operator>>(std::istream& in, abrosimov::Polygon& polygo
         return in;
     }
     size_t numPoints;
-    
     in >> numPoints;
-    
     if (numPoints < 3)
     {
         in.setstate(std::istream::failbit);
         return in;
     }
-    
     polygon.points.clear();
     polygon.points.resize(numPoints);
-    
     std::copy_n(std::istream_iterator<abrosimov::Point>(in), numPoints, std::back_inserter(polygon.points));
-    
     return in;
 }
 
@@ -120,10 +112,7 @@ std::ostream& abrosimov::operator<<(std::ostream& out, const abrosimov::Polygon&
     {
         return out;
     }
-    
     out << polygon.points.size() << " ";
-    
     std::copy(polygon.points.begin(), polygon.points.end(), std::ostream_iterator<abrosimov::Point>(out, " "));
-    
     return out;
 }
