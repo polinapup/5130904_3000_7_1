@@ -6,12 +6,10 @@ double abrosimov::Point::getDistance(const Point& point) const
     distance = sqrt((x - point.x) * (x - point.x) + (y - point.y) * (y - point.y));
     return distance;
 }
-
 bool abrosimov::Point::operator !=(const Point& other) const
 {
     return x != other.x or y != other.y;
 }
-
 double abrosimov::getTriangleArea(const Point& point1, const Point& point2, const Point& point3)
 {
     double firstSide = point1.getDistance(point2);
@@ -22,17 +20,14 @@ double abrosimov::getTriangleArea(const Point& point1, const Point& point2, cons
     triangleArea = sqrt(halfPerimeter * (halfPerimeter - firstSide) * (halfPerimeter - secondSide) * (halfPerimeter - thirdSide));
     return triangleArea;
 }
-
 bool abrosimov::Polygon::operator <(const Polygon& other) const
 {
     return getArea() < other.getArea();
 }
-
 bool abrosimov::Polygon::operator ==(const Polygon& other) const
 {
     return points == other.points;
 }
-
 double abrosimov::Polygon::getArea() const
 {
     const Point pointFirst = points[0];
@@ -47,7 +42,6 @@ double abrosimov::Polygon::getArea() const
         }
     );
 }
-
 std::istream& abrosimov::operator>>(std::istream& in, abrosimov::DelimiterIO&& dest)
 {
     std::istream::sentry sentry(in);
@@ -65,7 +59,6 @@ std::istream& abrosimov::operator>>(std::istream& in, abrosimov::DelimiterIO&& d
     }
     return in;
 }
-
 std::istream& abrosimov::operator>>(std::istream& in, abrosimov::Point& point)
 {
     std::istream::sentry sentry(in);
@@ -77,7 +70,6 @@ std::istream& abrosimov::operator>>(std::istream& in, abrosimov::Point& point)
     in >> abrosimov::DelimiterIO{ '(' } >> point.x >> abrosimov::DelimiterIO{ ';' } >> point.y >> abrosimov::DelimiterIO{ ')' };
     return in;
 }
-
 std::istream& abrosimov::operator>>(std::istream& in, abrosimov::Polygon& polygon)
 {
     std::istream::sentry sentry(in);
@@ -102,7 +94,6 @@ std::istream& abrosimov::operator>>(std::istream& in, abrosimov::Polygon& polygo
     
     return in;
 }
-
 std::ostream& abrosimov::operator<<(std::ostream& out, const abrosimov::Point& point)
 {
     std::ostream::sentry sentry(out);
@@ -113,7 +104,6 @@ std::ostream& abrosimov::operator<<(std::ostream& out, const abrosimov::Point& p
     out << "(" << point.x << ";" << point.y << ")";
     return out;
 }
-
 std::ostream& abrosimov::operator<<(std::ostream& out, const abrosimov::Polygon& polygon)
 {
     std::ostream::sentry sentry(out);
@@ -128,3 +118,4 @@ std::ostream& abrosimov::operator<<(std::ostream& out, const abrosimov::Polygon&
     
     return out;
 }
+

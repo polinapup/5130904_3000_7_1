@@ -12,9 +12,7 @@ namespace abrosimov
         double getDistance(const Point& point) const;
         bool operator !=(const Point& other) const;
     };
-    
     double getTriangleArea(const Point& point1, const Point& point2, const Point& point3);
-    
     struct Polygon
     {
         std::vector<Point> points;
@@ -22,12 +20,10 @@ namespace abrosimov
         bool operator ==(const Polygon& other) const;
         double getArea() const;
     };
-    
     struct DelimiterIO
     {
         char exp;
     };
-    
     std::istream& operator>>(std::istream& in, abrosimov::DelimiterIO&& dest);
     std::istream& operator>>(std::istream& in, abrosimov::Point& point);
     std::istream& operator>>(std::istream& in, abrosimov::Polygon& polygon);
@@ -36,3 +32,4 @@ namespace abrosimov
 }
 
 #endif
+
