@@ -30,7 +30,18 @@ bool abrosimov::Polygon::operator <(const Polygon& other) const
 
 bool abrosimov::Polygon::operator ==(const Polygon& other) const
 {
-    return points == other.points;
+    if (points.size() != other.points.size())
+    {
+        return false;
+    }
+    for (size_t i = 0; i < points.size(); i++)
+    {
+        if (points[i] != other.points[i])
+        {
+            return false;
+        }
+    }
+    return true;
 }
 
 double abrosimov::Polygon::getArea() const
