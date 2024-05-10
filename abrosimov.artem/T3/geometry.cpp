@@ -128,4 +128,3 @@ std::ostream& abrosimov::operator<<(std::ostream& out, const abrosimov::Polygon&
     
     return out;
 }
-
