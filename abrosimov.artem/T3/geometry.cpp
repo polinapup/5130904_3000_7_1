@@ -92,6 +92,7 @@ std::istream& abrosimov::operator>>(std::istream& in, abrosimov::Polygon& polygo
     {
         return in;
     }
+
     size_t numPoints;
     in >> numPoints;
     if (numPoints < 3)
@@ -99,10 +100,11 @@ std::istream& abrosimov::operator>>(std::istream& in, abrosimov::Polygon& polygo
         in.setstate(std::istream::failbit);
         return in;
     }
+
     polygon.points.clear();
     polygon.points.resize(numPoints);
 
-    for (gubanov::Point& point : polygon.points)
+    for (abrosimov::Point& point : polygon.points)
     {
         in >> point;
     }
