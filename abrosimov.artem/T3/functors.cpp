@@ -219,7 +219,6 @@ void functors::same(std::vector<Polygon>& polygons)
         throw "<INVALID COMMAND>";
     }
 
-    int maxCount = 0;
     int currentCount = 0;
 
     auto counter = [&](const Polygon tPolygon)
@@ -230,13 +229,11 @@ void functors::same(std::vector<Polygon>& polygons)
             }
             else
             {
-                maxCount = std::max(maxCount, currentCount);
                 currentCount = 0;
                 return false;
             }
             return true;
         };
     currentCount = std::count_if(polygons.begin(), polygons.end(), counter);
-    maxCount = std::max(maxCount, currentCount);
-    std::cout << maxCount << "\n";
+    std::cout << currentCount << "\n";
 }

@@ -62,7 +62,7 @@ int main(int argc, char* argv[])
             {
                 lessArea(vector);
             }
-            else if (command == "MAXSEQ")
+            else if (command == "SAME")
             {
                 same(vector);
             }
