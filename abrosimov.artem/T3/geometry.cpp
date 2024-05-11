@@ -101,7 +101,12 @@ std::istream& abrosimov::operator>>(std::istream& in, abrosimov::Polygon& polygo
     }
     polygon.points.clear();
     polygon.points.resize(numPoints);
-    std::copy_n(std::istream_iterator<abrosimov::Point>(in), numPoints, std::back_inserter(polygon.points));
+
+    for (gubanov::Point& point : polygon.points)
+    {
+        in >> point;
+    }
+
     return in;
 }
 
@@ -123,7 +128,13 @@ std::ostream& abrosimov::operator<<(std::ostream& out, const abrosimov::Polygon&
     {
         return out;
     }
+
     out << polygon.points.size() << " ";
-    std::copy(polygon.points.begin(), polygon.points.end(), std::ostream_iterator<abrosimov::Point>(out, " "));
+
+    for (const abrosimov::Point& point : polygon.points)
+    {
+        out << point << " ";
+    }
+
     return out;
 }
