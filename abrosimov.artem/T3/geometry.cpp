@@ -12,15 +12,15 @@ bool abrosimov::Point::operator !=(const Point& other) const
     return x != other.x or y != other.y;
 }
 
-double abrosimov::getTriangleArea(const Point& point1, const Point& point2, const Point& point3)
+double abrosimov::getTrigonArea(const Point& point1, const Point& point2, const Point& point3)
 {
     double firstSide = point1.getDistance(point2);
     double secondSide = point2.getDistance(point3);
     double thirdSide = point1.getDistance(point3);
     double halfPerimeter = (firstSide + secondSide + thirdSide) / 2;
-    double triangleArea = 0;
-    triangleArea = sqrt(halfPerimeter * (halfPerimeter - firstSide) * (halfPerimeter - secondSide) * (halfPerimeter - thirdSide));
-    return triangleArea;
+    double trigonArea = 0;
+    trigonArea = sqrt(halfPerimeter * (halfPerimeter - firstSide) * (halfPerimeter - secondSide) * (halfPerimeter - thirdSide));
+    return trigonArea;
 }
 
 bool abrosimov::Polygon::operator <(const Polygon& other) const
@@ -48,7 +48,7 @@ double abrosimov::Polygon::getArea() const
 {
     const Point pointFirst = points[0];
     Point prev = points[1];
-    return std::accumulate(points.begin() + 2, points.end(), 0.0,[&pointFirst, &prev](double accumulatedArea, const Point& current)
+    return std::accumulate(points.begin() + 2, points.end(), 0.0, [&pointFirst, &prev](double accumulatedArea, const Point& current)
         {
             double TriangleArea = getTriangleArea(pointFirst, prev, current);
             accumulatedArea += TriangleArea;
@@ -93,16 +93,16 @@ std::istream& abrosimov::operator>>(std::istream& in, abrosimov::Polygon& polygo
         return in;
     }
 
-    size_t numPoints;
-    in >> numPoints;
-    if (numPoints < 3)
+    size_t amountPoints;
+    in >> amountPoints;
+    if (amountPoints < 3)
     {
         in.setstate(std::istream::failbit);
         return in;
     }
 
     polygon.points.clear();
-    polygon.points.resize(numPoints);
+    polygon.points.resize(amountPoints);
 
     for (abrosimov::Point& point : polygon.points)
     {
