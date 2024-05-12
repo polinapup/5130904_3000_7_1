@@ -170,7 +170,7 @@ void functors::getQuantity(const std::vector<Polygon>& polygons)
     {
         if (string == "EVEN" or string == "ODD")
         {
-            std::cout << std::count_if(polygons.begin(), polygons.end(), 
+            std::cout << std::count_if(polygons.begin(), polygons.end(),
                 std::bind(count, _1, string)) << std::endl;
         }
         else
@@ -180,7 +180,7 @@ void functors::getQuantity(const std::vector<Polygon>& polygons)
     }
     else if (number > 2)
     {
-        std::cout << std::count_if(polygons.begin(), polygons.end(), 
+        std::cout << std::count_if(polygons.begin(), polygons.end(),
             std::bind(count, _1, "SPECIAL")) << std::endl;
     }
     else
