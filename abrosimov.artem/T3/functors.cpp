@@ -88,11 +88,10 @@ void functors::getMax(const std::vector<Polygon>& polygons)
     std::vector<size_t> vectorSize(polygons.size());
 
     std::transform(polygons.begin(), polygons.end(), vectorSize.begin(),
-        [](const Polygon& poly) 
-        { 
-            return poly.points.size(); 
+        [](const Polygon& poly)
+        {
+            return poly.points.size();
         });
-
     auto polygon = std::max_element(polygons.begin(), polygons.end());
     auto maxSize = std::max_element(vectorSize.begin(), vectorSize.end());
 
@@ -124,8 +123,8 @@ void functors::getMin(const std::vector<Polygon>& polygons)
 
     std::transform(polygons.begin(), polygons.end(), vectorSize.begin(),
         [](const Polygon& poly)
-        { 
-            return poly.points.size(); 
+        {
+            return poly.points.size();
         });
 
     auto polygon = std::min_element(polygons.begin(), polygons.end());
