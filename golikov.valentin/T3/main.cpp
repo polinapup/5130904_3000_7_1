@@ -14,6 +14,12 @@ using namespace golikov;
 
 int main(int argC, char* argV[])
 {
+  if (argC != 2)
+  {
+    std::cerr << INCORRECT_USAGE << std::endl;
+    return EXIT_FAILURE;
+  }
+
   std::string fileName = argV[1];
 
   std::ifstream file(fileName);
