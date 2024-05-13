@@ -31,7 +31,7 @@ namespace golikov
     std::vector<Segment> createSegmentPool(void) const;
     bool isIntersect(const Polygon& other) const;
   };
-  
+
   struct DelimeterIO
   {
     char exp;
@@ -42,7 +42,7 @@ namespace golikov
     Point bottom_left;
     Point top_right;
   };
-  
+
   std::istream& operator >> (std::istream& in, golikov::DelimeterIO&& dest);
   std::istream& operator >> (std::istream& in, golikov::Point& point);
   std::istream& operator >> (std::istream& in, golikov::Polygon& poly);
