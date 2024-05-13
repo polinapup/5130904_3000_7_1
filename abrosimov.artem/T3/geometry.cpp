@@ -81,6 +81,7 @@ std::istream& abrosimov::operator>>(std::istream& in, abrosimov::Point& point)
     {
         return in;
     }
+
     in >> abrosimov::DelimiterIO{ '(' } >> point.x >> abrosimov::DelimiterIO{ ';' } >> point.y >> abrosimov::DelimiterIO{ ')' };
     return in;
 }
