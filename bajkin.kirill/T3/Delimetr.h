@@ -14,4 +14,4 @@ struct DelimiterString
 };
 
 std::istream& operator>>(std::istream& in, DelimiterString&& exp);
-#endif#pragma once
+#endif
