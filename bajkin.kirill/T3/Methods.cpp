@@ -10,7 +10,7 @@ double getAreaEvenOdd(double curr, const bajkin::Polygon& pol, bool even)
 {
   if (even == (pol.points.size() % 2 == 0))
   {
-    curr = pol.getArea();
+    curr += pol.getArea();
   }
   return curr;
 }
