@@ -74,6 +74,7 @@ int main(int argC, char* argV[])
       catch (const std::string &err)
       {
         std::cout << err << std::endl;
+        file.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
       }
     }
 
