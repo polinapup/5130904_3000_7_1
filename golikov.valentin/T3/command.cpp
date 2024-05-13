@@ -81,7 +81,7 @@ void commands::getMin(const std::vector<golikov::Polygon>& data)
   std::cin >> arg;
 
   if (data.size() == 0)
-    throw "<INVALID COMMAND>";
+    throw I_C;
 
   std::vector<size_t> sizeVec(data.size());
 
@@ -95,7 +95,7 @@ void commands::getMin(const std::vector<golikov::Polygon>& data)
   else if (arg == "VERTEXES")
     std::cout << *minSize << std::endl;
   else
-    throw "<INVALID COMMAND>";
+    throw I_C;
 }
 
 //calculate max area
@@ -106,7 +106,7 @@ void commands::getMax(const std::vector<golikov::Polygon>& data)
   std::cin >> arg;
 
   if (data.size() == 0)
-    throw "<INVALID COMMAND>";
+    throw I_C;
 
   std::vector<size_t> sizeVec(data.size());
 
@@ -120,7 +120,7 @@ void commands::getMax(const std::vector<golikov::Polygon>& data)
   else if (arg == "VERTEXES")
     std::cout << *maxSize << std::endl;
   else
-    throw "<INVALID COMMAND>";
+    throw I_C;
 }
 
 //calculate all figures due to parameteres(method)
@@ -218,7 +218,7 @@ void commands::checkStream()
   if (!std::cin)
   {
     std::cin.clear();
-    throw "<INVALID COMMAND>";
+    throw I_C;
   }
 }
 
@@ -283,7 +283,7 @@ void commands::intersections(const std::vector<golikov::Polygon>& data)
   if (!std::cin)
   {
     std::cin.clear();
-    throw "<INVALID COMMAND>";
+    throw I_C;
   }
 
   auto cntFunc = [&trg]
