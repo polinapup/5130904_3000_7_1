@@ -1,11 +1,9 @@
-#include "methods.h"
+#include "functors.h"
 
-using namespace kalashnikova;
+using namespace abrosimov;
 using namespace std::placeholders;
 
-const std::string ERROR = "<INVALID COMMAND>";
-
-int methods::makeNumber(const std::string& str)
+int functors::convertToInt(const std::string& str)
 {
     try
     {
@@ -21,35 +19,35 @@ int methods::makeNumber(const std::string& str)
     }
 }
 
-void methods::getWholeArea(const std::vector<Polygon>& polygons)
+void functors::getTotalArea(const std::vector<Polygon>& polygons)
 {
     std::string string;
     std::cin >> string;
-    int num = makeNumber(string);
-    auto accumulateArea = [&polygons, &num]
+    int number = convertToInt(string);
+    auto accumulateArea = [&polygons, &number]
     (double accumulatedArea, const Polygon& current, const std::string method)
         {
-            double res = accumulatedArea;
+            double result = accumulatedArea;
             if (method == "EVEN" and current.points.size() % 2 == 0)
             {
-                res += current.getArea();
+                result += current.getArea();
             }
             else if (method == "ODD" and current.points.size() % 2 != 0)
             {
-                res += current.getArea();
+                result += current.getArea();
             }
             else if (method == "MEAN")
             {
-                res += current.getArea();
+                result += current.getArea();
             }
-            else if (method == "SPECIAL" and current.points.size() == static_cast<size_t>(num))
+            else if (method == "SPECIAL" and current.points.size() == static_cast<size_t>(number))
             {
-                res += current.getArea();
+                result += current.getArea();
             }
-            return res;
+            return result;
         };
 
-    if (num == -1)
+    if (number == -1)
     {
         if (string == "EVEN" or string == "ODD")
         {
@@ -63,39 +61,39 @@ void methods::getWholeArea(const std::vector<Polygon>& polygons)
         }
         else
         {
-            throw ERROR;
+            throw "<INVALID COMMAND>";
         }
     }
-    else if (num > 2)
+    else if (number > 2)
     {
         std::cout << std::accumulate(polygons.begin(), polygons.end(), 0.0,
             std::bind(accumulateArea, _1, _2, "SPECIAL")) << std::endl;
     }
     else
     {
-        throw ERROR;
+        throw "<INVALID COMMAND>";
     }
 }
 
-void methods::getMax(const std::vector<Polygon>& polygons)
+void functors::getMax(const std::vector<Polygon>& polygons)
 {
     std::string string;
     std::cin >> string;
 
     if (polygons.size() == 0)
     {
-        throw ERROR;
+        throw "<INVALID COMMAND>";
     }
 
-    std::vector<size_t> v_size(polygons.size());
+    std::vector<size_t> vectorSize(polygons.size());
 
-    std::transform(polygons.begin(), polygons.end(), v_size.begin(),
+    std::transform(polygons.begin(), polygons.end(), vectorSize.begin(),
         [](const Polygon& poly)
         {
             return poly.points.size();
         });
     auto polygon = std::max_element(polygons.begin(), polygons.end());
-    auto maxSize = std::max_element(v_size.begin(), v_size.end());
+    auto maxSize = std::max_element(vectorSize.begin(), vectorSize.end());
 
     if (string == "AREA")
     {
@@ -107,30 +105,30 @@ void methods::getMax(const std::vector<Polygon>& polygons)
     }
     else
     {
-        throw ERROR;
+        throw "<INVALID COMMAND>";
     }
 }
 
-void methods::getMin(const std::vector<Polygon>& polygons)
+void functors::getMin(const std::vector<Polygon>& polygons)
 {
     std::string string;
     std::cin >> string;
 
     if (polygons.size() == 0)
     {
-        throw ERROR;
+        throw "<INVALID COMMAND>";
     }
 
-    std::vector<size_t> v_size(polygons.size());
+    std::vector<size_t> vectorSize(polygons.size());
 
-    std::transform(polygons.begin(), polygons.end(), v_size.begin(),
+    std::transform(polygons.begin(), polygons.end(), vectorSize.begin(),
         [](const Polygon& poly)
         {
             return poly.points.size();
         });
 
     auto polygon = std::min_element(polygons.begin(), polygons.end());
-    auto minSize = std::min_element(v_size.begin(), v_size.end());
+    auto minSize = std::min_element(vectorSize.begin(), vectorSize.end());
 
     if (string == "AREA")
     {
@@ -142,16 +140,16 @@ void methods::getMin(const std::vector<Polygon>& polygons)
     }
     else
     {
-        throw ERROR;
+        throw "<INVALID COMMAND>";
     }
 }
 
-void methods::getQuantity(const std::vector<Polygon>& polygons)
+void functors::getQuantity(const std::vector<Polygon>& polygons)
 {
     std::string string;
     std::cin >> string;
-    int num = makeNumber(string);
-    auto count = [&num](const Polygon& polygon, const std::string& method)
+    int number = convertToInt(string);
+    auto count = [&number](const Polygon& polygon, const std::string& method)
         {
             if (method == "EVEN")
             {
@@ -163,12 +161,12 @@ void methods::getQuantity(const std::vector<Polygon>& polygons)
             }
             else if (method == "SPECIAL")
             {
-                return polygon.points.size() == static_cast<size_t>(num);
+                return polygon.points.size() == static_cast<size_t>(number);
             }
             return false;
         };
 
-    if (num == -1)
+    if (number == -1)
     {
         if (string == "EVEN" or string == "ODD")
         {
@@ -177,39 +175,39 @@ void methods::getQuantity(const std::vector<Polygon>& polygons)
         }
         else
         {
-            throw ERROR;
+            throw "<INVALID COMMAND>";
         }
     }
-    else if (num > 2)
+    else if (number > 2)
     {
         std::cout << std::count_if(polygons.begin(), polygons.end(),
             std::bind(count, _1, "SPECIAL")) << std::endl;
     }
     else
     {
-        throw ERROR;
+        throw "<INVALID COMMAND>";
     }
 }
 
-void methods::lessarea(std::vector<Polygon>& polygons)
+void functors::lessArea(std::vector<Polygon>& polygons)
 {
     if (polygons.empty())
     {
-        throw ERROR;
+        throw "<INVALID COMMAND>";
     }
 
     Polygon basic;
     std::cin >> basic;
 
-    auto space = std::find_if_not(std::istream_iterator<char>(std::cin), std::istream_iterator<char>(), isspace);
-    if (*space == std::iostream::traits_type::eof() or *space == int('n'))
+    auto firstNonWhitespace = std::find_if_not(std::istream_iterator<char>(std::cin), std::istream_iterator<char>(), isspace);
+    if (*firstNonWhitespace == std::iostream::traits_type::eof() or *firstNonWhitespace == int('n'))
     {
-        throw ERROR;
+        throw "<INVALID COMMAND>";
     }
-    if (!isspace(*space))
+    if (!isspace(*firstNonWhitespace))
     {
         std::cin.setstate(std::ios_base::failbit);
-        throw ERROR;
+        throw "<INVALID COMMAND>";
     }
 
     auto comparison = [&](const Polygon polygon)
@@ -221,25 +219,25 @@ void methods::lessarea(std::vector<Polygon>& polygons)
     std::cout << std::count_if(polygons.begin(), polygons.end(), comparison) << std::endl;
 }
 
-void methods::same(std::vector<Polygon>& polygons)
+void functors::same(std::vector<Polygon>& polygons)
 {
     if (polygons.empty())
     {
-        throw ERROR;
+        throw "<INVALID COMMAND>";
     }
 
     Polygon basic;
     std::cin >> basic;
 
-    auto space = std::find_if_not(std::istream_iterator<char>(std::cin), std::istream_iterator<char>(), isspace);
-    if (*space == std::iostream::traits_type::eof() or *space == int('n'))
+    auto firstNonWhitespace = std::find_if_not(std::istream_iterator<char>(std::cin), std::istream_iterator<char>(), isspace);
+    if (*firstNonWhitespace == std::iostream::traits_type::eof() or *firstNonWhitespace == int('n'))
     {
-        throw ERROR;
+        throw "<INVALID COMMAND>";
     }
-    if (!isspace(*space))
+    if (!isspace(*firstNonWhitespace))
     {
         std::cin.setstate(std::ios_base::failbit);
-        throw ERROR;
+        throw "<INVALID COMMAND>";
     }
 
     int count = 0;

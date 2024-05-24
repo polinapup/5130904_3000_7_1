@@ -1,17 +1,13 @@
-#include "methods.h"
+#include "functors.h"
 
-using namespace kalashnikova;
-using namespace methods;
-
-const std::string ERROR = "<INVALID COMMAND>";
-const std::string ERROR_2 = "ERROR: Filename is incorrect";
-const std::string ERROR_3 = "ERROR: File is not exist";
+using namespace abrosimov;
+using namespace functors;
 
 int main(int argc, char* argv[])
 {
     if (argc != 2)
     {
-        std::cerr << ERROR_2 << "\n";
+        std::cerr << "Error (bad filename)\n";
         return EXIT_FAILURE;
     }
 
@@ -19,7 +15,7 @@ int main(int argc, char* argv[])
     std::ifstream file(filename);
     if (!file)
     {
-        std::cerr << ERROR_3 << "\n";
+        std::cerr << "Error: (file not exist)\n";
         return EXIT_FAILURE;
     }
 
@@ -42,37 +38,37 @@ int main(int argc, char* argv[])
 
     while (!std::cin.eof())
     {
-        std::string cmd;
-        std::cin >> cmd;
+        std::string command;
+        std::cin >> command;
         try
         {
-            if (cmd == "AREA")
+            if (command == "AREA")
             {
-                getWholeArea(vector);
+                getTotalArea(vector);
             }
-            else if (cmd == "MAX")
+            else if (command == "MAX")
             {
                 getMax(vector);
             }
-            else if (cmd == "MIN")
+            else if (command == "MIN")
             {
                 getMin(vector);
             }
-            else if (cmd == "COUNT")
+            else if (command == "COUNT")
             {
                 getQuantity(vector);
             }
-            else if (cmd == "LESSAREA")
+            else if (command == "LESSAREA")
             {
-                lessarea(vector);
+                lessArea(vector);
             }
-            else if (cmd == "SAME")
+            else if (command == "SAME")
             {
                 same(vector);
             }
-            else if (cmd != "")
+            else if (command != "")
             {
-                throw ERROR;
+                throw "<INVALID COMMAND>";
             }
         }
         catch (const char* error)
