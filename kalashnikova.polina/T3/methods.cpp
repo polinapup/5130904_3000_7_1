@@ -29,24 +29,24 @@ void methods::getWholeArea(const std::vector<Polygon>& polygons)
     auto accumulateArea = [&polygons, &num]
     (double accumulatedArea, const Polygon& current, const std::string method)
         {
-            double result = accumulatedArea;
+            double res = accumulatedArea;
             if (method == "EVEN" and current.points.size() % 2 == 0)
             {
-                result += current.getArea();
+                res += current.getArea();
             }
             else if (method == "ODD" and current.points.size() % 2 != 0)
             {
-                result += current.getArea();
+                res += current.getArea();
             }
             else if (method == "MEAN")
             {
-                result += current.getArea();
+                res += current.getArea();
             }
             else if (method == "SPECIAL" and current.points.size() == static_cast<size_t>(num))
             {
-                result += current.getArea();
+                res += current.getArea();
             }
-            return result;
+            return res;
         };
 
     if (num == -1)
@@ -87,15 +87,15 @@ void methods::getMax(const std::vector<Polygon>& polygons)
         throw ERROR;
     }
 
-    std::vector<size_t> vecSize(polygons.size());
+    std::vector<size_t> v_size(polygons.size());
 
-    std::transform(polygons.begin(), polygons.end(), vecSize.begin(),
+    std::transform(polygons.begin(), polygons.end(), v_size.begin(),
         [](const Polygon& poly)
         {
             return poly.points.size();
         });
     auto polygon = std::max_element(polygons.begin(), polygons.end());
-    auto sizeMax = std::max_element(vecSize.begin(), vecSize.end());
+    auto maxSize = std::max_element(v_size.begin(), v_size.end());
 
     if (string == "AREA")
     {
@@ -103,7 +103,7 @@ void methods::getMax(const std::vector<Polygon>& polygons)
     }
     else if (string == "VERTEXES")
     {
-        std::cout << *sizeMax << std::endl;
+        std::cout << *maxSize << std::endl;
     }
     else
     {
@@ -121,16 +121,16 @@ void methods::getMin(const std::vector<Polygon>& polygons)
         throw ERROR;
     }
 
-    std::vector<size_t> vectorSize(polygons.size());
+    std::vector<size_t> v_size(polygons.size());
 
-    std::transform(polygons.begin(), polygons.end(), vectorSize.begin(),
+    std::transform(polygons.begin(), polygons.end(), v_size.begin(),
         [](const Polygon& poly)
         {
             return poly.points.size();
         });
 
     auto polygon = std::min_element(polygons.begin(), polygons.end());
-    auto sizeMin = std::min_element(vectorSize.begin(), vectorSize.end());
+    auto minSize = std::min_element(v_size.begin(), v_size.end());
 
     if (string == "AREA")
     {
@@ -138,7 +138,7 @@ void methods::getMin(const std::vector<Polygon>& polygons)
     }
     else if (string == "VERTEXES")
     {
-        std::cout << *sizeMin << std::endl;
+        std::cout << *minSize << std::endl;
     }
     else
     {
@@ -191,15 +191,15 @@ void methods::getQuantity(const std::vector<Polygon>& polygons)
     }
 }
 
-void methods::lessArea(std::vector<Polygon>& polygons)
+void methods::lessarea(std::vector<Polygon>& polygons)
 {
     if (polygons.empty())
     {
         throw ERROR;
     }
 
-    Polygon base;
-    std::cin >> base;
+    Polygon basic;
+    std::cin >> basic;
 
     auto space = std::find_if_not(std::istream_iterator<char>(std::cin), std::istream_iterator<char>(), isspace);
     if (*space == std::iostream::traits_type::eof() or *space == int('n'))
@@ -214,7 +214,7 @@ void methods::lessArea(std::vector<Polygon>& polygons)
 
     auto comparison = [&](const Polygon polygon)
         {
-            bool result = std::greater<double>()(base.getArea(), polygon.getArea());
+            bool result = std::greater<double>()(basic.getArea(), polygon.getArea());
             return result;
         };
 
@@ -228,8 +228,8 @@ void methods::same(std::vector<Polygon>& polygons)
         throw ERROR;
     }
 
-    Polygon base;
-    std::cin >> base;
+    Polygon basic;
+    std::cin >> basic;
 
     auto space = std::find_if_not(std::istream_iterator<char>(std::cin), std::istream_iterator<char>(), isspace);
     if (*space == std::iostream::traits_type::eof() or *space == int('n'))
@@ -246,7 +246,7 @@ void methods::same(std::vector<Polygon>& polygons)
 
     auto counter = [&](const Polygon tPolygon)
         {
-            if (base == tPolygon)
+            if (basic == tPolygon)
             {
                 count++;
             }
@@ -257,5 +257,6 @@ void methods::same(std::vector<Polygon>& polygons)
             }
             return true;
         };
-    std::cout << std::count_if(polygons.begin(), polygons.end(), counter) << "\n";
+    count = std::count_if(polygons.begin(), polygons.end(), counter);
+    std::cout << count << "\n";
 }

@@ -12,15 +12,15 @@ bool kalashnikova::Point::operator !=(const Point& other) const
     return x != other.x or y != other.y;
 }
 
-double kalashnikova::getTriangleArea(const Point& point, const Point& point2, const Point& point3)
+double kalashnikova::getTriangleArea(const Point& point_, const Point& point2, const Point& point3)
 {
-    double side = point.getDistance(point2);
+    double side_ = point_.getDistance(point2);
     double side2 = point2.getDistance(point3);
-    double side3 = point.getDistance(point3);
-    double perimeter = (side + side2 + side3) / 2;
-    double area = 0;
-    area = sqrt(perimeter * (perimeter - side) * (perimeter - side2) * (perimeter - side3));
-    return area;
+    double side3 = point_.getDistance(point3);
+    double perimeter = (side_ + side2 + side3) / 2;
+    double tr_area = 0;
+    tr_area = sqrt(perimeter * (perimeter - side_) * (perimeter - side2) * (perimeter - side3));
+    return tr_area;
 }
 
 bool kalashnikova::Polygon::operator <(const Polygon& other) const
@@ -46,16 +46,16 @@ bool kalashnikova::Polygon::operator ==(const Polygon& other) const
 
 double kalashnikova::Polygon::getArea() const
 {
-  const Point point = points[0];
-  Point pointLast = points[1];
-  return std::accumulate(points.begin() + 2, points.end(), 0.0, [&point, &pointLast](double accumulatedArea, const Point& current)
-    {
-      double triangleArea = getTriangleArea(point, pointLast, current);
-      accumulatedArea += triangleArea;
-      pointLast = current;
-      return accumulatedArea;
-    }
-  );
+    const Point point1 = points[0];
+    Point last_ = points[1];
+    return std::accumulate(points.begin() + 2, points.end(), 0.0, [&point1, &last_](double accumulatedArea, const Point& current)
+        {
+            double trg_area = getTriangleArea(point1, last_, current);
+            accumulatedArea += trg_area;
+            last_ = current;
+            return accumulatedArea;
+        }
+    );
 }
 
 std::istream& kalashnikova::operator>>(std::istream& in, kalashnikova::DelimiterIO&& dest)
@@ -65,9 +65,9 @@ std::istream& kalashnikova::operator>>(std::istream& in, kalashnikova::Delimiter
     {
         return in;
     }
-    char zero = '0';
-    in >> zero;
-    if (in && (zero != dest.exp))
+    char null = '0';
+    in >> null;
+    if (in && (null != dest.exp))
     {
         in.setstate(std::ios::failbit);
     }
@@ -94,16 +94,16 @@ std::istream& kalashnikova::operator>>(std::istream& in, kalashnikova::Polygon& 
         return in;
     }
 
-    size_t amtPoints;
-    in >> amtPoints;
-    if (amtPoints < 3)
+    size_t amountPoints;
+    in >> amountPoints;
+    if (amountPoints < 3)
     {
         in.setstate(std::istream::failbit);
         return in;
     }
 
     polygon.points.clear();
-    polygon.points.resize(amtPoints);
+    polygon.points.resize(amountPoints);
 
     for (kalashnikova::Point& point : polygon.points)
     {

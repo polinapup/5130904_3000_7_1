@@ -19,7 +19,7 @@ int main(int argc, char* argv[])
     std::ifstream file(filename);
     if (!file)
     {
-        std::cerr << ERROR_3 <<"\n";
+        std::cerr << ERROR_3 << "\n";
         return EXIT_FAILURE;
     }
 
@@ -42,35 +42,35 @@ int main(int argc, char* argv[])
 
     while (!std::cin.eof())
     {
-        std::string command;
-        std::cin >> command;
+        std::string cmd;
+        std::cin >> cmd;
         try
         {
-            if (command == "AREA")
+            if (cmd == "AREA")
             {
                 getWholeArea(vector);
             }
-            else if (command == "MAX")
+            else if (cmd == "MAX")
             {
                 getMax(vector);
             }
-            else if (command == "MIN")
+            else if (cmd == "MIN")
             {
                 getMin(vector);
             }
-            else if (command == "COUNT")
+            else if (cmd == "COUNT")
             {
                 getQuantity(vector);
             }
-            else if (command == "LESSAREA")
+            else if (cmd == "LESSAREA")
             {
-                lessArea(vector);
+                lessarea(vector);
             }
-            else if (command == "SAME")
+            else if (cmd == "SAME")
             {
                 same(vector);
             }
-            else if (command != "")
+            else if (cmd != "")
             {
                 throw ERROR;
             }

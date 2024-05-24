@@ -7,19 +7,20 @@ namespace kalashnikova
 {
     struct Point
     {
-        int x, y;
+        int x;
+        int y;
         double getDistance(const Point& point) const;
         bool operator !=(const Point& other) const;
     };
 
-    double getTriangleArea(const Point& point, const Point& point2, const Point& point3);
+    double getTriangleArea(const Point& point_, const Point& point2, const Point& point3);
 
     struct Polygon
     {
         std::vector<Point> points;
-        double getArea() const;
         bool operator <(const Polygon& other) const;
         bool operator ==(const Polygon& other) const;
+        double getArea() const;
     };
 
     struct DelimiterIO
