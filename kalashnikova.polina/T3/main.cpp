@@ -75,7 +75,7 @@ int main(int argc, char* argv[])
                 throw ERROR;
             }
         }
-        catch (const char* error)
+        catch (const std::string &error)
         {
             std::cout << error << std::endl;
             std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
