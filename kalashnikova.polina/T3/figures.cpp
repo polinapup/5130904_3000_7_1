@@ -23,20 +23,6 @@ double kalashnikova::getTriangleArea(const Point& point, const Point& point2, co
     return area;
 }
 
-double kalashnikova::Polygon::getArea() const
-{
-  const Point point = points[0];
-  Point pointLast = points[1];
-  return std::accumulate(points.begin() + 2, points.end(), 0.0, [&point, &pointLast](double accumulatedArea, const Point& current)
-    {
-      double triangleArea = getTriangleArea(point, pointLast, current);
-      accumulatedArea += triangleArea;
-      pointLast = current;
-      return accumulatedArea;
-    }
-  );
-}
-
 bool kalashnikova::Polygon::operator <(const Polygon& other) const
 {
     return getArea() < other.getArea();
@@ -56,6 +42,20 @@ bool kalashnikova::Polygon::operator ==(const Polygon& other) const
         }
     }
     return true;
+}
+
+double kalashnikova::Polygon::getArea() const
+{
+  const Point point = points[0];
+  Point pointLast = points[1];
+  return std::accumulate(points.begin() + 2, points.end(), 0.0, [&point, &pointLast](double accumulatedArea, const Point& current)
+    {
+      double triangleArea = getTriangleArea(point, pointLast, current);
+      accumulatedArea += triangleArea;
+      pointLast = current;
+      return accumulatedArea;
+    }
+  );
 }
 
 std::istream& kalashnikova::operator>>(std::istream& in, kalashnikova::DelimiterIO&& dest)

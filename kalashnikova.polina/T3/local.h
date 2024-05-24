@@ -3,7 +3,6 @@
 
 #include <iostream>
 #include <iterator>
-#include <string>
 #include <vector>
 #include <algorithm>
 #include <functional>
@@ -11,6 +10,7 @@
 #include <limits>
 #include <cmath>
 #include <numeric>
+#include <string>
 #include <iomanip>
 
 #endif
