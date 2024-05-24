@@ -1,9 +1,9 @@
-#ifndef GEOMETRY_H
-#define GEOMETRY_H
+#ifndef FIGURES_H
+#define FIGURES_H
 
 #include "local.h"
 
-namespace abrosimov
+namespace kalashnikova
 {
     struct Point
     {
@@ -28,11 +28,11 @@ namespace abrosimov
         char exp;
     };
 
-    std::istream& operator>>(std::istream& in, abrosimov::DelimiterIO&& dest);
-    std::istream& operator>>(std::istream& in, abrosimov::Point& point);
-    std::istream& operator>>(std::istream& in, abrosimov::Polygon& polygon);
-    std::ostream& operator<<(std::ostream& out, const abrosimov::Point& point);
-    std::ostream& operator<<(std::ostream& out, const abrosimov::Polygon& polygon);
+    std::istream& operator>>(std::istream& in, kalashnikova::DelimiterIO&& dest);
+    std::istream& operator>>(std::istream& in, kalashnikova::Point& point);
+    std::istream& operator>>(std::istream& in, kalashnikova::Polygon& polygon);
+    std::ostream& operator<<(std::ostream& out, const kalashnikova::Point& point);
+    std::ostream& operator<<(std::ostream& out, const kalashnikova::Polygon& polygon);
 }
 
 #endif

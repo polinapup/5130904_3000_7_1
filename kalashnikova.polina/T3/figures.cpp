@@ -1,18 +1,18 @@
-#include "geometry.h"
+#include "figures.h"
 
-double abrosimov::Point::getDistance(const Point& point) const
+double kalashnikova::Point::getDistance(const Point& point) const
 {
     double distance = 0;
     distance = sqrt((x - point.x) * (x - point.x) + (y - point.y) * (y - point.y));
     return distance;
 }
 
-bool abrosimov::Point::operator !=(const Point& other) const
+bool kalashnikova::Point::operator !=(const Point& other) const
 {
     return x != other.x or y != other.y;
 }
 
-double abrosimov::getTrigonArea(const Point& point1, const Point& point2, const Point& point3)
+double kalashnikova::getTrigonArea(const Point& point1, const Point& point2, const Point& point3)
 {
     double firstSide = point1.getDistance(point2);
     double secondSide = point2.getDistance(point3);
@@ -23,12 +23,12 @@ double abrosimov::getTrigonArea(const Point& point1, const Point& point2, const 
     return trigonArea;
 }
 
-bool abrosimov::Polygon::operator <(const Polygon& other) const
+bool kalashnikova::Polygon::operator <(const Polygon& other) const
 {
     return getArea() < other.getArea();
 }
 
-bool abrosimov::Polygon::operator ==(const Polygon& other) const
+bool kalashnikova::Polygon::operator ==(const Polygon& other) const
 {
     if (points.size() != other.points.size())
     {
@@ -44,7 +44,7 @@ bool abrosimov::Polygon::operator ==(const Polygon& other) const
     return true;
 }
 
-double abrosimov::Polygon::getArea() const
+double kalashnikova::Polygon::getArea() const
 {
     const Point pointFirst = points[0];
     Point prev = points[1];
@@ -58,7 +58,7 @@ double abrosimov::Polygon::getArea() const
     );
 }
 
-std::istream& abrosimov::operator>>(std::istream& in, abrosimov::DelimiterIO&& dest)
+std::istream& kalashnikova::operator>>(std::istream& in, kalashnikova::DelimiterIO&& dest)
 {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -74,7 +74,7 @@ std::istream& abrosimov::operator>>(std::istream& in, abrosimov::DelimiterIO&& d
     return in;
 }
 
-std::istream& abrosimov::operator>>(std::istream& in, abrosimov::Point& point)
+std::istream& kalashnikova::operator>>(std::istream& in, kalashnikova::Point& point)
 {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -82,11 +82,11 @@ std::istream& abrosimov::operator>>(std::istream& in, abrosimov::Point& point)
         return in;
     }
 
-    in >> abrosimov::DelimiterIO{ '(' } >> point.x >> abrosimov::DelimiterIO{ ';' } >> point.y >> abrosimov::DelimiterIO{ ')' };
+    in >> kalashnikova::DelimiterIO{ '(' } >> point.x >> kalashnikova::DelimiterIO{ ';' } >> point.y >> kalashnikova::DelimiterIO{ ')' };
     return in;
 }
 
-std::istream& abrosimov::operator>>(std::istream& in, abrosimov::Polygon& polygon)
+std::istream& kalashnikova::operator>>(std::istream& in, kalashnikova::Polygon& polygon)
 {
     std::istream::sentry sentry(in);
     if (!sentry)
@@ -105,7 +105,7 @@ std::istream& abrosimov::operator>>(std::istream& in, abrosimov::Polygon& polygo
     polygon.points.clear();
     polygon.points.resize(amountPoints);
 
-    for (abrosimov::Point& point : polygon.points)
+    for (kalashnikova::Point& point : polygon.points)
     {
         in >> point;
     }
@@ -113,7 +113,7 @@ std::istream& abrosimov::operator>>(std::istream& in, abrosimov::Polygon& polygo
     return in;
 }
 
-std::ostream& abrosimov::operator<<(std::ostream& out, const abrosimov::Point& point)
+std::ostream& kalashnikova::operator<<(std::ostream& out, const kalashnikova::Point& point)
 {
     std::ostream::sentry sentry(out);
     if (!sentry)
@@ -124,7 +124,7 @@ std::ostream& abrosimov::operator<<(std::ostream& out, const abrosimov::Point& p
     return out;
 }
 
-std::ostream& abrosimov::operator<<(std::ostream& out, const abrosimov::Polygon& polygon)
+std::ostream& kalashnikova::operator<<(std::ostream& out, const kalashnikova::Polygon& polygon)
 {
     std::ostream::sentry sentry(out);
     if (!sentry)
@@ -134,7 +134,7 @@ std::ostream& abrosimov::operator<<(std::ostream& out, const abrosimov::Polygon&
 
     out << polygon.points.size() << " ";
 
-    for (const abrosimov::Point& point : polygon.points)
+    for (const kalashnikova::Point& point : polygon.points)
     {
         out << point << " ";
     }

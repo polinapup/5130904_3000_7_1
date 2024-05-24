@@ -1,7 +1,7 @@
-#include "functors.h"
+#include "methods.h"
 
-using namespace abrosimov;
-using namespace functors;
+using namespace kalashnikova;
+using namespace methods;
 
 int main(int argc, char* argv[])
 {

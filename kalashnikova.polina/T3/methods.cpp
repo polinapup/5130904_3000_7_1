@@ -1,9 +1,9 @@
-#include "functors.h"
+#include "methods.h"
 
-using namespace abrosimov;
+using namespace kalashnikova;
 using namespace std::placeholders;
 
-int functors::convertToInt(const std::string& str)
+int methods::convertToInt(const std::string& str)
 {
     try
     {
@@ -19,7 +19,7 @@ int functors::convertToInt(const std::string& str)
     }
 }
 
-void functors::getTotalArea(const std::vector<Polygon>& polygons)
+void methods::getTotalArea(const std::vector<Polygon>& polygons)
 {
     std::string string;
     std::cin >> string;
@@ -75,7 +75,7 @@ void functors::getTotalArea(const std::vector<Polygon>& polygons)
     }
 }
 
-void functors::getMax(const std::vector<Polygon>& polygons)
+void methods::getMax(const std::vector<Polygon>& polygons)
 {
     std::string string;
     std::cin >> string;
@@ -109,7 +109,7 @@ void functors::getMax(const std::vector<Polygon>& polygons)
     }
 }
 
-void functors::getMin(const std::vector<Polygon>& polygons)
+void methods::getMin(const std::vector<Polygon>& polygons)
 {
     std::string string;
     std::cin >> string;
@@ -144,7 +144,7 @@ void functors::getMin(const std::vector<Polygon>& polygons)
     }
 }
 
-void functors::getQuantity(const std::vector<Polygon>& polygons)
+void methods::getQuantity(const std::vector<Polygon>& polygons)
 {
     std::string string;
     std::cin >> string;
@@ -189,7 +189,7 @@ void functors::getQuantity(const std::vector<Polygon>& polygons)
     }
 }
 
-void functors::lessArea(std::vector<Polygon>& polygons)
+void methods::lessArea(std::vector<Polygon>& polygons)
 {
     if (polygons.empty())
     {
@@ -219,7 +219,7 @@ void functors::lessArea(std::vector<Polygon>& polygons)
     std::cout << std::count_if(polygons.begin(), polygons.end(), comparison) << std::endl;
 }
 
-void functors::same(std::vector<Polygon>& polygons)
+void methods::same(std::vector<Polygon>& polygons)
 {
     if (polygons.empty())
     {
