@@ -5,7 +5,7 @@ const std::string ERROR = "<INVALID COMMAND>";
 using namespace kalashnikova;
 using namespace std::placeholders;
 
-int methods::convertToInt(const std::string& str)
+int methods::makeNumber(const std::string& str)
 {
     try
     {
@@ -21,35 +21,35 @@ int methods::convertToInt(const std::string& str)
     }
 }
 
-void methods::getTotalArea(const std::vector<Polygon>& polygons)
+void methods::getWholeArea(const std::vector<Polygon>& polygons)
 {
     std::string string;
     std::cin >> string;
-    int number = convertToInt(string);
-    auto accumulateArea = [&polygons, &number]
+    int num = makeNumber(string);
+    auto accumulateArea = [&polygons, &num]
     (double accumulatedArea, const Polygon& current, const std::string method)
         {
-            double result = accumulatedArea;
+            double res = accumulatedArea;
             if (method == "EVEN" and current.points.size() % 2 == 0)
             {
-                result += current.getArea();
+                res += current.getArea();
             }
             else if (method == "ODD" and current.points.size() % 2 != 0)
             {
-                result += current.getArea();
+                res += current.getArea();
             }
             else if (method == "MEAN")
             {
-                result += current.getArea();
+                res += current.getArea();
             }
-            else if (method == "SPECIAL" and current.points.size() == static_cast<size_t>(number))
+            else if (method == "SPECIAL" and current.points.size() == static_cast<size_t>(num))
             {
-                result += current.getArea();
+                res += current.getArea();
             }
-            return result;
+            return res;
         };
 
-    if (number == -1)
+    if (num == -1)
     {
         if (string == "EVEN" or string == "ODD")
         {
@@ -66,7 +66,7 @@ void methods::getTotalArea(const std::vector<Polygon>& polygons)
             throw ERROR;
         }
     }
-    else if (number > 2)
+    else if (num > 2)
     {
         std::cout << std::accumulate(polygons.begin(), polygons.end(), 0.0,
             std::bind(accumulateArea, _1, _2, "SPECIAL")) << std::endl;
@@ -87,15 +87,15 @@ void methods::getMax(const std::vector<Polygon>& polygons)
         throw ERROR;
     }
 
-    std::vector<size_t> vectorSize(polygons.size());
+    std::vector<size_t> vec_size(polygons.size());
 
-    std::transform(polygons.begin(), polygons.end(), vectorSize.begin(),
+    std::transform(polygons.begin(), polygons.end(), vec_size.begin(),
         [](const Polygon& poly)
         {
             return poly.points.size();
         });
     auto polygon = std::max_element(polygons.begin(), polygons.end());
-    auto maxSize = std::max_element(vectorSize.begin(), vectorSize.end());
+    auto maxSize = std::max_element(vec_size.begin(), vec_size.end());
 
     if (string == "AREA")
     {
@@ -121,16 +121,16 @@ void methods::getMin(const std::vector<Polygon>& polygons)
         throw ERROR;
     }
 
-    std::vector<size_t> vectorSize(polygons.size());
+    std::vector<size_t> vec_size(polygons.size());
 
-    std::transform(polygons.begin(), polygons.end(), vectorSize.begin(),
+    std::transform(polygons.begin(), polygons.end(), vec_size.begin(),
         [](const Polygon& poly)
         {
             return poly.points.size();
         });
 
     auto polygon = std::min_element(polygons.begin(), polygons.end());
-    auto minSize = std::min_element(vectorSize.begin(), vectorSize.end());
+    auto minSize = std::min_element(vec_size.begin(), vec_size.end());
 
     if (string == "AREA")
     {
@@ -146,12 +146,12 @@ void methods::getMin(const std::vector<Polygon>& polygons)
     }
 }
 
-void methods::getQuantity(const std::vector<Polygon>& polygons)
+void methods::getCounter(const std::vector<Polygon>& polygons)
 {
     std::string string;
     std::cin >> string;
-    int number = convertToInt(string);
-    auto count = [&number](const Polygon& polygon, const std::string& method)
+    int num = makeNumber(string);
+    auto count = [&num](const Polygon& polygon, const std::string& method)
         {
             if (method == "EVEN")
             {
@@ -163,12 +163,12 @@ void methods::getQuantity(const std::vector<Polygon>& polygons)
             }
             else if (method == "SPECIAL")
             {
-                return polygon.points.size() == static_cast<size_t>(number);
+                return polygon.points.size() == static_cast<size_t>(num);
             }
             return false;
         };
 
-    if (number == -1)
+    if (num == -1)
     {
         if (string == "EVEN" or string == "ODD")
         {
@@ -180,7 +180,7 @@ void methods::getQuantity(const std::vector<Polygon>& polygons)
             throw ERROR;
         }
     }
-    else if (number > 2)
+    else if (num > 2)
     {
         std::cout << std::count_if(polygons.begin(), polygons.end(),
             std::bind(count, _1, "SPECIAL")) << std::endl;
@@ -191,7 +191,7 @@ void methods::getQuantity(const std::vector<Polygon>& polygons)
     }
 }
 
-void methods::lessArea(std::vector<Polygon>& polygons)
+void methods::lessarea(std::vector<Polygon>& polygons)
 {
     if (polygons.empty())
     {
@@ -201,24 +201,24 @@ void methods::lessArea(std::vector<Polygon>& polygons)
     Polygon basic;
     std::cin >> basic;
 
-    auto firstNonWhitespace = std::find_if_not(std::istream_iterator<char>(std::cin), std::istream_iterator<char>(), isspace);
-    if (*firstNonWhitespace == std::iostream::traits_type::eof() or *firstNonWhitespace == int('n'))
+    auto space = std::find_if_not(std::istream_iterator<char>(std::cin), std::istream_iterator<char>(), isspace);
+    if (*space == std::iostream::traits_type::eof() or *space == int('n'))
     {
         throw ERROR;
     }
-    if (!isspace(*firstNonWhitespace))
+    if (!isspace(*space))
     {
         std::cin.setstate(std::ios_base::failbit);
         throw ERROR;
     }
 
-    auto comparison = [&](const Polygon polygon)
+    auto concurrent = [&](const Polygon polygon)
         {
-            bool result = std::greater<double>()(basic.getArea(), polygon.getArea());
-            return result;
+            bool res = std::greater<double>()(basic.getArea(), polygon.getArea());
+            return res;
         };
 
-    std::cout << std::count_if(polygons.begin(), polygons.end(), comparison) << std::endl;
+    std::cout << std::count_if(polygons.begin(), polygons.end(), concurrent) << std::endl;
 }
 
 void methods::same(std::vector<Polygon>& polygons)
@@ -231,12 +231,12 @@ void methods::same(std::vector<Polygon>& polygons)
     Polygon basic;
     std::cin >> basic;
 
-    auto firstNonWhitespace = std::find_if_not(std::istream_iterator<char>(std::cin), std::istream_iterator<char>(), isspace);
-    if (*firstNonWhitespace == std::iostream::traits_type::eof() or *firstNonWhitespace == int('n'))
+    auto space = std::find_if_not(std::istream_iterator<char>(std::cin), std::istream_iterator<char>(), isspace);
+    if (*space == std::iostream::traits_type::eof() or *space == int('n'))
     {
         throw ERROR;
     }
-    if (!isspace(*firstNonWhitespace))
+    if (!isspace(*space))
     {
         std::cin.setstate(std::ios_base::failbit);
         throw ERROR;

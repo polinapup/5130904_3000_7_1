@@ -6,12 +6,12 @@
 
 namespace methods
 {
-    int convertToInt(const std::string& str);
-    void getTotalArea(const std::vector<kalashnikova::Polygon>& polygons);
+    int makeNumber(const std::string& str);
+    void getWholeArea(const std::vector<kalashnikova::Polygon>& polygons);
     void getMax(const std::vector<kalashnikova::Polygon>& polygons);
     void getMin(const std::vector<kalashnikova::Polygon>& polygons);
-    void getQuantity(const std::vector<kalashnikova::Polygon>& polygons);
-    void lessArea(std::vector<kalashnikova::Polygon>& polygons);
+    void getCounter(const std::vector<kalashnikova::Polygon>& polygons);
+    void lessarea(std::vector<kalashnikova::Polygon>& polygons);
     void same(std::vector<kalashnikova::Polygon>& polygons);
 }
 
