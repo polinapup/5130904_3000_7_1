@@ -7,8 +7,7 @@ namespace kalashnikova
 {
     struct Point
     {
-        int x;
-        int y;
+        int x, y;
         double getDistance(const Point& point_) const;
         bool operator !=(const Point& other) const;
     };
@@ -17,7 +16,7 @@ namespace kalashnikova
 
     struct Polygon
     {
-        std::vector<Point> points;
+        std::vector< Point > points;
         bool operator <(const Polygon& other) const;
         bool operator ==(const Polygon& other) const;
         double getArea() const;
