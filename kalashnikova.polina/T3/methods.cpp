@@ -1,5 +1,7 @@
 #include "methods.h"
 
+const std::string ERROR = "<INVALID COMMAND>";
+
 using namespace kalashnikova;
 using namespace std::placeholders;
 
@@ -61,7 +63,7 @@ void methods::getTotalArea(const std::vector<Polygon>& polygons)
         }
         else
         {
-            throw "<INVALID COMMAND>";
+            throw ERROR;
         }
     }
     else if (number > 2)
@@ -71,7 +73,7 @@ void methods::getTotalArea(const std::vector<Polygon>& polygons)
     }
     else
     {
-        throw "<INVALID COMMAND>";
+        throw ERROR;
     }
 }
 
@@ -82,7 +84,7 @@ void methods::getMax(const std::vector<Polygon>& polygons)
 
     if (polygons.size() == 0)
     {
-        throw "<INVALID COMMAND>";
+        throw ERROR;
     }
 
     std::vector<size_t> vectorSize(polygons.size());
@@ -105,7 +107,7 @@ void methods::getMax(const std::vector<Polygon>& polygons)
     }
     else
     {
-        throw "<INVALID COMMAND>";
+        throw ERROR;
     }
 }
 
@@ -116,7 +118,7 @@ void methods::getMin(const std::vector<Polygon>& polygons)
 
     if (polygons.size() == 0)
     {
-        throw "<INVALID COMMAND>";
+        throw ERROR;
     }
 
     std::vector<size_t> vectorSize(polygons.size());
@@ -140,7 +142,7 @@ void methods::getMin(const std::vector<Polygon>& polygons)
     }
     else
     {
-        throw "<INVALID COMMAND>";
+        throw ERROR;
     }
 }
 
@@ -175,7 +177,7 @@ void methods::getQuantity(const std::vector<Polygon>& polygons)
         }
         else
         {
-            throw "<INVALID COMMAND>";
+            throw ERROR;
         }
     }
     else if (number > 2)
@@ -185,7 +187,7 @@ void methods::getQuantity(const std::vector<Polygon>& polygons)
     }
     else
     {
-        throw "<INVALID COMMAND>";
+        throw ERROR;
     }
 }
 
@@ -193,7 +195,7 @@ void methods::lessArea(std::vector<Polygon>& polygons)
 {
     if (polygons.empty())
     {
-        throw "<INVALID COMMAND>";
+        throw ERROR;
     }
 
     Polygon basic;
@@ -202,12 +204,12 @@ void methods::lessArea(std::vector<Polygon>& polygons)
     auto firstNonWhitespace = std::find_if_not(std::istream_iterator<char>(std::cin), std::istream_iterator<char>(), isspace);
     if (*firstNonWhitespace == std::iostream::traits_type::eof() or *firstNonWhitespace == int('n'))
     {
-        throw "<INVALID COMMAND>";
+        throw ERROR;
     }
     if (!isspace(*firstNonWhitespace))
     {
         std::cin.setstate(std::ios_base::failbit);
-        throw "<INVALID COMMAND>";
+        throw ERROR;
     }
 
     auto comparison = [&](const Polygon polygon)
@@ -223,7 +225,7 @@ void methods::same(std::vector<Polygon>& polygons)
 {
     if (polygons.empty())
     {
-        throw "<INVALID COMMAND>";
+        throw ERROR;
     }
 
     Polygon basic;
@@ -232,12 +234,12 @@ void methods::same(std::vector<Polygon>& polygons)
     auto firstNonWhitespace = std::find_if_not(std::istream_iterator<char>(std::cin), std::istream_iterator<char>(), isspace);
     if (*firstNonWhitespace == std::iostream::traits_type::eof() or *firstNonWhitespace == int('n'))
     {
-        throw "<INVALID COMMAND>";
+        throw ERROR;
     }
     if (!isspace(*firstNonWhitespace))
     {
         std::cin.setstate(std::ios_base::failbit);
-        throw "<INVALID COMMAND>";
+        throw ERROR;
     }
 
     int count = 0;

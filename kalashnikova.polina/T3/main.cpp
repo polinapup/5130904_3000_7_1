@@ -1,5 +1,9 @@
 #include "methods.h"
 
+const std::string ERROR = "<INVALID COMMAND>";
+const std::string ERROR_FILENAME = "ERROR: Filename isn't correct";
+const std::string ERROR_NO_FILE = "ERROR: No file found";
+
 using namespace kalashnikova;
 using namespace methods;
 
@@ -7,7 +11,7 @@ int main(int argc, char* argv[])
 {
     if (argc != 2)
     {
-        std::cerr << "Error (bad filename)\n";
+        std::cerr << ERROR_FILENAME << "\n";
         return EXIT_FAILURE;
     }
 
@@ -15,7 +19,7 @@ int main(int argc, char* argv[])
     std::ifstream file(filename);
     if (!file)
     {
-        std::cerr << "Error: (file not exist)\n";
+        std::cerr << ERROR_NO_FILE << "\n";
         return EXIT_FAILURE;
     }
 
@@ -68,7 +72,7 @@ int main(int argc, char* argv[])
             }
             else if (command != "")
             {
-                throw "<INVALID COMMAND>";
+                throw ERROR;
             }
         }
         catch (const char* error)
